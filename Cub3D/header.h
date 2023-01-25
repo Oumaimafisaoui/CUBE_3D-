@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/25 13:53:39 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:02:23 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,4 +211,7 @@ void put_big_player_circle(t_all *cub);
 void horizontal_inter(t_all *cub);
 void set_tab(t_ray *tab, t_all *cub);
 void	my_mlx_pixel_put3(t_all *cub, int x, int y, int color);
+void	*ft_calloc(size_t num, size_t size);
+void	ft_bzero(void *str, size_t n);
+
 #endif

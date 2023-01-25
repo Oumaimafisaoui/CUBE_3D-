@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 11:26:29 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/24 18:29:22 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:02:38 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,20 @@ void is_up2(t_all *cub)
 {
     if((cub->var_d.is_up == 1 && cub->var_d.ysteps1 > 0) || (cub->var_d.is_down == 1 && cub->var_d.ysteps1 < 0))
         cub->var_d.ysteps1 *= -1;
+}
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	void	*p;
+
+	p = malloc(num * size);
+	if(p == 0)
+		return (p);
+	ft_bzero(p, num * size);
+	return (p);
+
+}
+void	ft_bzero(void *str, size_t n)
+{
+	ft_memset(str, '\0', n);
 }
