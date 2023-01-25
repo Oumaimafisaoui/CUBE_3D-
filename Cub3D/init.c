@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/25 10:51:31 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:07:21 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void init(t_all *cub)
     cub->mlx_win = NULL;
     cub->img = NULL;
     cub->addr = NULL;
+    cub->img1  = NULL;
+    cub->addr1 = NULL;
     cub->bits_per_pixel = 0;
     cub->line_length = 0;
     cub->endian = 0;
@@ -49,6 +51,9 @@ void init_suite(t_all *cub)
     cub->var_d.is_left = 0;
     cub->three.wall_projection = 0;
     cub->three.ray_distance = 0;
+    cub->bits_per_pixel1 = 0;
+	cub->line_length1 = 0;
+	cub->endian1 = 0;
     init_suite1(cub);
 }
 
@@ -71,7 +76,7 @@ void init_suite0(t_all *cub)
     cub->map_y = 0;
     cub->var_d.num_rays = 0;
     cub->three.d_player_pro = 0;
-    cub->ray = calloc(sizeof(t_ray), cub->map_w);
+    cub->ray = calloc(sizeof(t_ray), WINDOW_W);
     cub->ray->down = 0;
     cub->ray->angle = 0;
     cub->ray->up = 0;
@@ -133,21 +138,27 @@ void launch_mlx(t_all *cub)
     cub->mlx = mlx_init();
     if (cub->mlx == NULL)
         ft_error("mlx_init failed\n");
-    cub->mlx_win = mlx_new_window(cub->mlx, 1920, 1080, "Cub3D");
+    cub->mlx_win = mlx_new_window(cub->mlx, WINDOW_W, WINDOW_H, "Cub3D");
     if (cub->mlx_win == NULL)
         ft_error("mlx_new_window failed\n");
     cub->img = mlx_new_image(cub->mlx, cub->map_w, cub->map_h);
     cub->addr = mlx_get_data_addr(cub->img, &cub->bits_per_pixel, &cub->line_length,
                                 &cub->endian);
+
+    cub->img1 = mlx_new_image(cub->mlx, WINDOW_W, WINDOW_H);
+    cub->addr1 = mlx_get_data_addr(cub->img1, &cub->bits_per_pixel1, &cub->line_length1,
+                                &cub->endian1);
     draw_minimap(cub);
     get_player_coord(cub);
     put_big_player_circle(cub);
     set_direction(cub);
     make_rays(cub);
-    // generate_3d(cub);
+    mlx_clear_window(cub->mlx, cub->mlx_win);
+    generate_3d(cub);
     dda(cub);
-    mlx_hook(cub->mlx_win, 2, 0 , mouvements, cub);
+    mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img1, 0, 0);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
+    mlx_hook(cub->mlx_win, 2, 0 , mouvements, cub);
     mlx_hook(cub->mlx_win, 17, 0, exit_program, cub);
     mlx_loop(cub->mlx);
 }

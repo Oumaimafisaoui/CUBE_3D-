@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/25 10:59:43 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:53:39 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "parsing/cub3d.h"
 #include <math.h>
 
+
 #define CUBE 10
 #define VIEW  100
 #define FEILD (60 * (M_PI / 180))
@@ -30,6 +31,8 @@
 #define DOWN 1
 #define RIGHT 2
 #define LEFT 0
+#define WINDOW_W 1920
+#define WINDOW_H 1080
 
 typedef struct s_player
 {
@@ -124,10 +127,18 @@ typedef struct s_cub
     void *mlx;
     void *mlx_win;
     void	*img;
+    void    *img1;
+    char    *addr1;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+
+
+    int		bits_per_pixel1;
+	int		line_length1;
+	int		endian1;
+    
     double map_w;
     double map_h;
     t_player player;
@@ -199,4 +210,5 @@ void dda2(t_all *cub);
 void put_big_player_circle(t_all *cub);
 void horizontal_inter(t_all *cub);
 void set_tab(t_ray *tab, t_all *cub);
+void	my_mlx_pixel_put3(t_all *cub, int x, int y, int color);
 #endif
