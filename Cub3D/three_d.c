@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:55:40 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/25 14:12:55 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:16:57 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void generate_3d(t_all *cub)
      while(i < cub->var_d.num_rays)
      {
           cub->three.d_player_pro = (WINDOW_W / 2) / tan(FEILD / 2);
-          cub->three.ray_distance = cub->ray[i].distance;
+          cub->three.ray_distance = cub->ray[i].distance * (cos(cub->ray[i].angle  - cub->player.ang));
           cub->three.wall_projection = (CUBE / cub->three.ray_distance) * cub->three.d_player_pro;
 
           int wall_height = (int)cub->three.wall_projection;
